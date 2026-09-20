@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CrashTrace - Crash Diagnostic Tool
+  Copyright (c) 2026 Limen
+  Licensed under the MIT License.
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{3D7C48AE-9824-43BF-9CF5-E91D4F51E771}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TestApp</RootNamespace>
+    <AssemblyName>CrashTrace</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="SharpDisasm">
+      <HintPath>SharpDisasm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Runtime">
+      <HintPath>Microsoft.Diagnostics.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NativeInterop.cs" />
+    <Compile Include="PeReaders.cs" />
+    <Compile Include="ModuleClassifier.cs" />
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="CrashReportData.cs" />
+    <Compile Include="SystemDiagnostics.cs" />
+    <Compile Include="HangDetector.cs" />
+    <Compile Include="MiniDumpWriter.cs" />
+    <Compile Include="RecommendationEngine.cs" />
+    <Compile Include="CrashPatternAnalyzer.cs" />
+    <Compile Include="MemoryInspector.cs" />
+    <Compile Include="BasicDisassembler.cs" />
+    <Compile Include="StringExtractor.cs" />
+    <Compile Include="EntropyAnalyzer.cs" />
+    <Compile Include="ThreadAnalyzer.cs" />
+    <Compile Include="CompanionLogReader.cs" />
+    <Compile Include="EngineDetector.cs" />
+    <Compile Include="ApiHookDetector.cs" />
+    <Compile Include="ProcessEnvironmentReader.cs" />
+    <Compile Include="WerReportReader.cs" />
+    <Compile Include="ManifestReader.cs" />
+    <Compile Include="DisassemblyHelper.cs" />
+    <Compile Include="ClrAssemblyReader.cs" />
+    <Compile Include="DllScanner.cs" />
+    <Compile Include="DllScanForm.cs" />
+    <Compile Include="ReadinessAnalyzer.cs" />
+    <Compile Include="Can I Run It.cs" />
+    <Compile Include="Can I Run It.Designer.cs">
+      <DependentUpon>Can I Run It.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutForm.cs" />
+    <Compile Include="ManagedExceptionReader.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="CopyHelper" AfterTargets="Build">
+    <PropertyGroup>
+      <Helper32Exe>$(SolutionDir)TestAppHelper32\bin\$(Configuration)\TestAppHelper32.exe</Helper32Exe>
+      <Helper64Exe>$(SolutionDir)TestAppHelper64\bin\$(Configuration)\TestAppHelper64.exe</Helper64Exe>
+      <ClrMd32Dll>$(SolutionDir)TestAppHelper32\bin\$(Configuration)\Microsoft.Diagnostics.Runtime.dll</ClrMd32Dll>
+      <ClrMd64Dll>$(SolutionDir)TestAppHelper64\bin\$(Configuration)\Microsoft.Diagnostics.Runtime.dll</ClrMd64Dll>
+    </PropertyGroup>
+    <!-- 32-bit helper and its DLLs -->
+    <Copy SourceFiles="$(Helper32Exe)" DestinationFolder="$(OutputPath)" Condition="Exists('$(Helper32Exe)')" ContinueOnError="true" />
+    <Copy SourceFiles="$(ClrMd32Dll)" DestinationFolder="$(OutputPath)" Condition="Exists('$(ClrMd32Dll)')" ContinueOnError="true" />
+    <!-- 64-bit helper and its DLLs -->
+    <Copy SourceFiles="$(Helper64Exe)" DestinationFolder="$(OutputPath)" Condition="Exists('$(Helper64Exe)')" ContinueOnError="true" />
+    <Copy SourceFiles="$(ClrMd64Dll)" DestinationFolder="$(OutputPath)" Condition="Exists('$(ClrMd64Dll)')" ContinueOnError="true" />
+  </Target>
+</Project>
