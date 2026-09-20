@@ -1,0 +1,561 @@
+﻿==================================================
+ Automated Crash / Exit Diagnostic Report
+==================================================
+Target program : C:\Users\****\Desktop\New folder (2)\aatest.exe
+Started at     : 2026-09-20 15:35:22
+Finished at    : 2026-09-20 15:35:28
+Architecture   : x86 (32-bit)
+Subsystem      : Windows GUI 6.0
+Entry point    : 0x0000766E
+Sections       : 3
+DLL chars      : HIGH_ENTROPY_VA, DYNAMIC_BASE (ASLR), NX_COMPAT (DEP), NO_SEH, TERMINAL_SERVER_AWARE
+Managed (.NET) : Yes
+SHA256         : 5CAF45D5D1686B7B8D1467E574F4FB75242A6E52B4416FE870F38B593C692C59
+Signature      : Not digitally signed (or signature could not be verified)
+
+==================================================
+ PROBLEM
+==================================================
+Result        : CRASH (unhandled exception)
+Status code   : 0xE0434352
+Meaning       : .NET CLR Exception - unhandled exception in managed code
+Managed exception : System.Reflection.TargetInvocationException
+Managed message   : Exception has been thrown by the target of an invocation.
+Managed stack trace:
+  InvokeMethod
+  UnsafeInvokeInternal
+  DynamicInvokeImpl
+  InvokeMarshaledCallbackDo
+  InvokeMarshaledCallbackHelper
+  RunInternal
+  Run
+  Run
+  InvokeMarshaledCallback
+  InvokeMarshaledCallbacks
+  WndProc
+  WndProc
+  WndProc
+  OnMessage
+  WndProc
+  DebuggableCallback
+  DispatchMessageW
+  FPushMessageLoop
+  RunMessageLoopInner
+  RunMessageLoop
+  Run
+  Main
+Address       : 0x760AB5B2
+Module        : C:\Windows\SysWOW64\KernelBase.dll
+Offset        : 0x12B5B2
+Time to crash : 6 second(s) after start
+
+Faulting code : MOV ECX, [ESP+disp8]
+Explanation   : Load a value from memory or register into a register. A crash here usually means the source address was invalid.
+
+Hang          : The target window became unresponsive.
+First hang at : 15:35:28
+Hang count    : 1
+
+==================================================
+ MISSING DEPENDENCIES
+==================================================
+Not yet loaded, but the file DOES exist on disk (probably NOT the cause):
+  - mscoree.dll
+
+
+==================================================
+ TECHNICAL DETAILS
+==================================================
+CPU registers at crash:
+  EAX = 0x00B5EA18
+  EBX = 0x00000005
+  ECX = 0x00000005
+  EDX = 0x00000000
+  ESI = 0x00B5EAD8
+  EDI = 0x00000001
+  ESP = 0x00B5EA18
+  EBP = 0x00B5EA70
+  EIP = 0x760AB5B2
+  EFLAGS = 0x00200216
+
+Mini disassembly around crash site:
+  (engine: SharpDisasm (udis86))
+  0x760AB59A    push ecx
+  0x760AB59B    lea eax, [esp+0x1c]
+  0x760AB59F    push eax
+  0x760AB5A0    call 0x760b4f04
+  0x760AB5A5    add esp, 0xc
+  0x760AB5A8    lea eax, [esp]
+  0x760AB5AB    push eax
+  0x760AB5AC    call dword [0x7615d3fc]
+  0x760AB5B2    mov ecx, [esp+0x54]      <-- FAULTING INSTRUCTION
+  0x760AB5B6    xor ecx, esp
+  0x760AB5B8    call 0x760b03e0
+  0x760AB5BD    mov esp, ebp
+  0x760AB5BF    pop ebp
+  0x760AB5C0    ret 0x10
+  0x760AB5C3    and dword [esp+0x10], 0x0
+  0x760AB5C8    jmp 0x760ab5a8
+  0x760AB5CA    push 0xf
+
+
+Memory region at crash site:
+  Base        : 0x760AB000
+  Size        : 0xAE000
+  State       : MEM_COMMIT
+  Protection  : PAGE_EXECUTE_READ
+  Type        : MEM_IMAGE
+  Note        : This is a memory-mapped IMAGE (code or data from a loaded executable/DLL).
+
+Memory around crash site:
+00000000760AB592  89 44 24 10 C1 E0 02 50  51 8D 44 24 1C 50 E8 5F  |.D$....PQ.D$.P._|
+00000000760AB5A2  99 00 00 83 C4 0C 8D 04  24 50 FF 15 FC D3 15 76  |........$P.....v|
+00000000760AB5B2  8B 4C 24 54 33 CC E8 23  4E 00 00 8B E5 5D C2 10  |.L$T3..#N....]..|
+00000000760AB5C2  00 83 64 24 10 00 EB DE  6A 0F 58 EB C3 CC CC CC  |..d$....j.X.....|
+00000000760AB5D2  CC CC CC CC CC CC CC CC  CC CC CC CC CC CC 8B FF  |................|
+00000000760AB5E2  55 8B EC 8B 55 0C 8B 4D  08 6A 00 E8 57 8E FE FF  |U...U..M.j..W...|
+
+
+Stack memory (top of stack):
+  Region base : 0xB5E000
+  Region size : 0x2000
+0000000000B5EA18  52 43 43 E0 01 00 00 00  00 00 00 00 B2 B5 0A 76  |RCC............v|
+0000000000B5EA28  05 00 00 00 04 16 13 80  00 00 00 00 00 00 00 00  |................|
+0000000000B5EA38  00 00 00 00 00 00 26 75  48 17 F5 00 58 EB B5 00  |......&uH...X...|
+0000000000B5EA48  01 00 00 00 E0 EA B5 00  D8 EA B5 00 AD 9A 27 75  |..............'u|
+0000000000B5EA58  24 7F B9 02 48 17 F5 00  5D 9B 27 75 38 EA B5 00  |$...H...].'u8...|
+0000000000B5EA68  48 17 F5 00 85 37 0A 88  0C EB B5 00 A1 C6 3E 75  |H....7........>u|
+0000000000B5EA78  52 43 43 E0 01 00 00 00  05 00 00 00 D8 EA B5 00  |RCC.............|
+0000000000B5EA88  01 A0 CA F3 00 00 00 00  24 7F B9 02 00 00 00 00  |........$.......|
+0000000000B5EA98  48 17 F5 00 01 00 00 00  52 43 43 E0 B0 EA B5 00  |H.......RCC.....|
+0000000000B5EAA8  7C EA B5 00 24 7F B9 02  24 7F B9 02 00 00 00 00  ||...$...$.......|
+0000000000B5EAB8  30 EB B5 00 28 E5 B5 00  CC EA B5 00 52 43 43 E0  |0...(.......RCC.|
+0000000000B5EAC8  52 43 43 E0 00 00 00 00  24 7F B9 02 00 00 00 00  |RCC.....$.......|
+0000000000B5EAD8  04 16 13 80 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+0000000000B5EAE8  00 00 26 75 48 17 F5 00  D4 18 F5 00 88 EA B5 00  |..&uH...........|
+0000000000B5EAF8  28 E5 B5 00 2C EB B5 00  60 A7 3E 75 C5 8D 41 86  |(...,...`.>u..A.|
+0000000000B5EB08  00 00 00 00 20 EB B5 00  4E C0 42 75 00 00 00 00  |.... ...N.Bu....|
+0000000000B5EB18  24 7F B9 02 2C EB B5 00  48 EB B5 00 C0 C0 42 75  |$...,...H.....Bu|
+0000000000B5EB28  02 00 00 00 DC EE B5 00  80 C1 3E 75 58 EB B5 00  |..........>uX...|
+0000000000B5EB38  24 7F B9 02 48 17 F5 00  02 00 00 00 45 A0 CA F3  |$...H.......E...|
+0000000000B5EB48  74 EB B5 00 FE C0 42 75  02 00 00 00 18 F1 ED F2  |t.....Bu........|
+0000000000B5EB58  48 15 27 75 9C EB B5 00  70 EB B5 00 01 00 00 00  |H.'u....p.......|
+0000000000B5EB68  48 17 F5 00 00 00 00 00  24 7F B9 02 D8 EB B5 00  |H.......$.......|
+0000000000B5EB78  06 C1 42 75 02 00 00 00  24 7F B9 02 BB 2E 70 75  |..Bu....$.....pu|
+0000000000B5EB88  DC EE B5 00 58 53 31 73  00 00 00 00 FE FF FF FF  |....XS1s........|
+0000000000B5EB98  18 F1 ED F2 48 15 27 75  1C EC B5 00 D0 EB B5 00  |....H.'u........|
+0000000000B5EBA8  01 00 00 00 48 17 F5 00  00 00 00 00 18 F1 ED F2  |....H...........|
+0000000000B5EBB8  48 15 27 75 9C EB B5 00  D4 EB B5 00 01 00 00 00  |H.'u............|
+0000000000B5EBC8  48 17 F5 00 00 00 00 00  1C 68 B9 02 24 7F B9 02  |H........h..$...|
+0000000000B5EBD8  E8 EE B5 00 0C 34 70 75  00 00 00 00 54 66 B9 02  |.....4pu....Tf..|
+0000000000B5EBE8  F9 75 28 75 A4 0D 2F 75  00 00 00 00 64 14 20 73  |.u(u../u....d. s|
+0000000000B5EBF8  A8 ED B5 00 E8 EE B5 00  A8 ED B5 00 DB DE 3F 75  |..............?u|
+0000000000B5EC08  E5 A5 CA F3 00 00 00 00  A8 67 B9 02 54 66 B9 02  |.........g..Tf..|
+
+
+Call stack (top = where it happened):
+  #0  KernelBase.dll+0x12B5B2
+  #1  clr.dll+0x18C6A1
+  #2  clr.dll+0x1CC04E
+  #3  clr.dll+0x1CC0C0
+  #4  clr.dll+0x1CC0FE
+  #5  clr.dll+0x1CC106
+  #6  clr.dll+0x4A340C
+  #7  mscorlib.ni.dll+0x4136FC
+  #8  mscorlib.ni.dll+0x3FFBED
+  #9  System.Windows.Forms.ni.dll+0x1D6145
+  #10  System.Windows.Forms.ni.dll+0x1D6058
+  #11  mscorlib.ni.dll+0x4037B4
+  #12  mscorlib.ni.dll+0x4036E7
+  #13  mscorlib.ni.dll+0x4036A4
+  #14  System.Windows.Forms.ni.dll+0x1D5FEA
+  #15  System.Windows.Forms.ni.dll+0x1D5DE4
+  #16  System.Windows.Forms.ni.dll+0x1C526F
+  #17  System.Windows.Forms.ni.dll+0x1CEB01
+  #18  System.Windows.Forms.ni.dll+0x1CE7C7
+  #19  System.Windows.Forms.ni.dll+0x1C5143
+  #20  System.Windows.Forms.ni.dll+0x1C50D5
+  #21  System.Windows.Forms.ni.dll+0x8B43AB
+  #22  0xD7D0B9
+  #23  user32.dll+0x4348B
+  #24  user32.dll+0x3A42A
+  #25  user32.dll+0x3819A
+  #26  user32.dll+0x37F60
+  #27  System.Windows.Forms.ni.dll+0x22882D
+  #28  System.Windows.Forms.ni.dll+0x1D563F
+  #29  System.Windows.Forms.ni.dll+0x1D522D
+  #30  System.Windows.Forms.ni.dll+0x1D5083
+  #31  System.Windows.Forms.ni.dll+0x1AD841
+  #32  0xDC087E
+  #33  clr.dll+0x10576
+  #34  clr.dll+0x1379A
+  #35  clr.dll+0x19B3B
+  #36  clr.dll+0x16ECEB
+  #37  clr.dll+0x16F3CA
+  #38  clr.dll+0x16F2F7
+  #39  clr.dll+0x16F478
+
+Note on symbols:
+  Function names could not be resolved, so only module names and offsets
+  are shown. This does not affect the accuracy of the analysis - the
+  offset (for example "game.exe+0x1A4F2") is stable across runs and
+  machines, unlike a raw memory address.
+
+  Why symbols might be unavailable:
+    - the symbol engine failed to start.
+    - Symbol resolution in this tool is fully offline by design: it never
+      connects to the internet, and it does not use Microsoft's online
+      symbol server. It only looks for symbol files (PDB) that already
+      exist locally on this computer.
+    - Bundling all Windows symbol files with the tool is not practical:
+      the full set for a single Windows build alone can exceed several
+      gigabytes, would noticeably slow the tool down at startup, and would
+      still not match a different Windows build running on another machine.
+    - Symbols for the target program itself (its own EXE) are also not
+      bundled. Only the program's developer can provide them, and they
+      must be placed next to the target EXE to be used.
+
+  The rest of this report is still fully valid - it just shows addresses
+  and offsets instead of human-readable function names.
+
+Performance at crash:
+  Working set  : 27 MB
+  Handles      : 346
+  Free RAM     : 11483 MB
+  Free disk    : 10 GB
+
+==================================================
+ ENVIRONMENT
+==================================================
+Section entropy:
+  .text      size=0x00005800 entropy=5.418 - Normal - typical code or data
+  (unnamed)  size=0x00000010 entropy=0.000 - Low - typically padding, zero-filled, or highly repetitive data
+
+Threads at crash:
+  Total threads: 6
+  TID 9312     state=Wait         wait=Executive          prio=Normal       cpu=468ms
+  TID 7752     state=Wait         wait=Executive          prio=Normal       cpu=0ms
+  TID 7968     state=Wait         wait=Executive          prio=Normal       cpu=0ms
+  TID 5960     state=Wait         wait=Executive          prio=Normal       cpu=0ms
+  TID 7952     state=Wait         wait=Executive          prio=Highest      cpu=0ms
+  TID 3192     state=Wait         wait=Executive          prio=Normal       cpu=0ms
+
+Compatibility : Windows applied compatibility shims to this program.
+Application manifest:
+Source: embedded resource
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <requestedExecutionLevel level="asInvoker" uiAccess="false"/>
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>
+
+Notable strings in the executable:
+  !This program cannot be run in DOS mode.
+  lSystem.Resources.ResourceReader, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089#System.Resources.RuntimeResourceSet
+  aatest.exe
+  System.Windows.Forms
+  System.ComponentModel
+  Test01_NullReference
+  Test02_IndexOutOfRange
+  Test03_ArgumentOutOfRange
+  Test04_DivideByZero
+  Test05_InvalidCast
+  Test06_FormatException
+  Test07_KeyNotFound
+  Test08_ManagedStackOverflow
+  Test09_OutOfMemory
+  Test10_StaticConstructorThrows
+  Test11_BackgroundThreadCrash
+  Test12_AsyncEventHandlerCrash
+  Test13_AccessViolationRead
+  Test14_AccessViolationWrite
+  Test15_CallThroughGarbagePointer
+  Test16_NativeStackOverflow
+  Test17_HeapBufferOverflow
+  Test18_DoubleFree
+  Test19_UseAfterFree
+  Test20_InvalidHandleReuse
+  Test21_GuardPageViolation
+  Test22_IllegalInstruction
+  Test23_DepViolation
+  Test24_NativeSehUnhandled
+  Test25_RaiseFailFast
+  Test26_CallingConventionStackCorruption
+  Test27_StackBufferSmash
+  Test28_ClassicDeadlock
+  Test29_HangOnUnsignaledEvent
+  Test30_UiThreadBusyLoop
+  Test31_UiThreadLongSleep
+  Test32_Livelock
+  Test33_TimerCallbackCrash
+  Test34_ManagedFailFast
+  Test35_ForceTerminateProcess
+  Test36_HandleExhaustion
+  Test37_BadHResult
+  Test38_CleanExitControl
+  Test39_ExceptionDuringUnwind
+  Test40_CrashInsideCrashHandler
+  MEM_COMMIT
+  MEM_RESERVE
+  PAGE_READWRITE
+  PAGE_EXECUTE_READWRITE
+  PAGE_GUARD
+  GENERIC_READ
+  OPEN_EXISTING
+  FILE_ATTRIBUTE_NORMAL
+  RaiseFailFastException
+  MessageBeep_WrongConvention
+  System.Runtime.InteropServices
+  System.Runtime.Versioning
+  System.Reflection
+  System.Security.Permissions
+  System.Runtime.CompilerServices
+
+
+==================================================
+ WHAT YOU SHOULD TRY
+==================================================
+  1. The crash was reported inside a core Windows module. This is usually misleading: the actual problem is almost always an invalid argument or a bad pointer passed in from the program itself. Windows did not cause the crash, it just reported it.
+  2. Look at the call stack above. The first frame inside the program's own code (not a Windows DLL) is where the real fault occurred.
+  3. Windows has applied compatibility shims to this program, meaning Microsoft already knows it has issues on this Windows version. You may want to try changing the compatibility mode of the EXE manually (Properties -> Compatibility).
+  4. The program became unresponsive at least once during monitoring. If it eventually recovered, the cause is likely a slow disk, a blocked network call, or a background operation. If it never recovered, this may indicate an infinite loop or a deadlock inside the program.
+
+==================================================
+ LAST EVENTS LEADING UP TO THIS RESULT
+==================================================
+  [15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\CoreUIComponents.dll
+  [15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\CoreMessaging.dll
+  [15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ws2_32.dll
+  [15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\WinTypes.dll
+  [15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\WinTypes.dll
+  [15:35:22] [DLL] Module unloaded: C:\Windows\SysWOW64\WinTypes.dll
+  [15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ntmarta.dll
+  [15:35:27] [Exception - Non-fatal] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 - the program will likely handle this itself.
+  [15:35:27] [Exception - Non-fatal] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 - the program will likely handle this itself.
+  [15:35:27] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\diasymreader.dll
+  [15:35:27] [Managed] Exception: System.Reflection.TargetInvocationException - Exception has been thrown by the target of an invocation.
+  [15:35:27] [!!! FATAL CRASH !!!] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 in module: C:\Windows\SysWOW64\KernelBase.dll - Thread 9312
+  [15:35:27] [Call Stack] 40 frame(s) captured - see the final report for details.
+  [15:35:28] [Hang] Target window became unresponsive at 15:35:28
+  [15:35:28] [Info] Monitoring stopped.
+
+==================================================
+ LIVE EVENT LOG
+==================================================
+[15:35:10] [Info] Target architecture: x86 (32-bit), Subsystem: Windows GUI 6.0
+[15:35:10] [Info] Sections: 3, Entry point: 0x0000766E
+[15:35:10] [Info] DLL characteristics: HIGH_ENTROPY_VA, DYNAMIC_BASE (ASLR), NX_COMPAT (DEP), NO_SEH, TERMINAL_SERVER_AWARE
+[15:35:10] [Info] Managed (.NET): Yes, TLS: No, Relocations: Yes
+[15:35:10] [Info] This is a managed .NET assembly - many native-crash diagnostics do not apply.
+[15:35:10] [Warning] Symbol engine (dbghelp.dll) failed to start (error -2147483635). Function names will be limited; Module+Offset will still work.
+[15:35:10] [Info] Monitoring started for: C:\Users\*****\Desktop\New folder (2)\aatest.exe (PID 7416)
+[15:35:10] [Process] Target process created successfully.
+[15:35:10] [DLL] Loaded: C:\Windows\System32\ntdll.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\ntdll.dll
+[15:35:10] [DLL] Loaded: C:\Windows\System32\wow64.dll
+[15:35:10] [DLL] Loaded: C:\Windows\System32\wow64win.dll
+[15:35:10] [WOW64] Subsystem event at 0x7FFF351406B0 (64-bit layer, not part of the 32-bit program)
+[15:35:10] [DLL] Loaded: C:\Windows\System32\wow64cpu.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\mscoree.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\kernel32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\KernelBase.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\apphelp.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\AcGenral.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\msvcrt.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\sechost.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\rpcrt4.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\shlwapi.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\user32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\win32u.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\gdi32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\gdi32full.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\msvcp_win.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\ucrtbase.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\ole32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\combase.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\oleaut32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\shell32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\advapi32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\uxtheme.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\winmm.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\samcli.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\msacm32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\version.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\userenv.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\dwmapi.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\urlmon.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\winspool.drv
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\mpr.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\sspicli.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\winmmbase.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\iertutil.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\SHCore.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\srvcli.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\netutils.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\imm32.dll
+[15:35:10] [Exception - Non-fatal] Code: 0x4000001F (First-chance notification on WOW64 startup (routine, not an error)) at address 0x77DC1BA2 - the program will likely handle this itself.
+[15:35:10] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscoreei.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\kernel.appcore.dll
+[15:35:10] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\clr.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\vcruntime140_clr0400.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\ucrtbase_clr0400.dll
+[15:35:10] [Thread] New thread created (TID 9120)
+[15:35:10] [Thread] New thread created (TID 1140)
+[15:35:10] [Exception - Non-fatal] Code: 0x04242420 (.NET debugger notification (routine)) at address 0x760AB5B2 - the program will likely handle this itself.
+[15:35:10] [Thread] New thread created (TID 3024)
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\psapi.dll
+[15:35:10] [DLL] Module unloaded: C:\Windows\SysWOW64\psapi.dll
+[15:35:10] [Thread] New thread created (TID 10144)
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\mscorlib\ef4992f14ba62dc115c01e7a6018e263\mscorlib.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\bcryptprimitives.dll
+[15:35:10] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\clrjit.dll
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System\dfbf0633415b3a3aa4269dadfbf59dd7\System.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Drawing\c849c8b772883a7d22a281e720854cf7\System.Drawing.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Windows.Forms\dfc9997f7c0c1e092ab93d14314ddfd3\System.Windows.Forms.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Core\125e7f523f68e1f804b59ce7662cee20\System.Core.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Configuration\e0fbeb6785aa6fa336bfcd8e9ce437c2\System.Configuration.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml\09693b06a195c27853dbfbd12b550387\System.Xml.ni.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\windows.storage.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\wldp.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\profapi.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\bcrypt.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\cryptsp.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\rsaenh.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\cryptbase.dll
+[15:35:10] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.19041.1110_none_c0da534e38c01f4d\comctl32.dll
+[15:35:10] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.19041.1288_none_d9539a9fe102720c\GdiPlus.dll
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\DWrite.dll
+[15:35:10] [Thread] New thread created (TID 7972)
+[15:35:10] [DLL] Loaded: C:\Windows\SysWOW64\msctf.dll
+[15:35:11] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_a8625c1886757984\comctl32.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\TextShaping.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\TextInputFramework.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\CoreUIComponents.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\CoreMessaging.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\ntmarta.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\ws2_32.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\WinTypes.dll
+[15:35:11] [DLL] Loaded: C:\Windows\SysWOW64\WinTypes.dll
+[15:35:11] [DLL] Module unloaded: C:\Windows\SysWOW64\WinTypes.dll
+[15:35:11] [Thread] New thread created (TID 6336)
+[15:35:15] [Thread] New thread created (TID 9492)
+[15:35:15] [Exception - Non-fatal] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 - the program will likely handle this itself.
+[15:35:15] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\diasymreader.dll
+[15:35:16] [Managed] Exception: System.ApplicationException - Deliberate crash on a background thread.
+[15:35:16] [!!! FATAL CRASH !!!] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 in module: C:\Windows\SysWOW64\KernelBase.dll - Thread 9492
+[15:35:16] [Call Stack] 21 frame(s) captured - see the final report for details.
+[15:35:16] [Hang] Target window became unresponsive at 15:35:16
+[15:35:17] [Info] Monitoring stopped.
+[15:35:22] [Info] Target architecture: x86 (32-bit), Subsystem: Windows GUI 6.0
+[15:35:22] [Info] Sections: 3, Entry point: 0x0000766E
+[15:35:22] [Info] DLL characteristics: HIGH_ENTROPY_VA, DYNAMIC_BASE (ASLR), NX_COMPAT (DEP), NO_SEH, TERMINAL_SERVER_AWARE
+[15:35:22] [Info] Managed (.NET): Yes, TLS: No, Relocations: Yes
+[15:35:22] [Info] This is a managed .NET assembly - many native-crash diagnostics do not apply.
+[15:35:22] [Warning] Symbol engine (dbghelp.dll) failed to start (error -2147483635). Function names will be limited; Module+Offset will still work.
+[15:35:22] [Info] Monitoring started for: C:\Users\*****\Desktop\New folder (2)\aatest.exe (PID 8552)
+[15:35:22] [Process] Target process created successfully.
+[15:35:22] [DLL] Loaded: C:\Windows\System32\ntdll.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ntdll.dll
+[15:35:22] [DLL] Loaded: C:\Windows\System32\wow64.dll
+[15:35:22] [DLL] Loaded: C:\Windows\System32\wow64win.dll
+[15:35:22] [WOW64] Subsystem event at 0x7FFF351406B0 (64-bit layer, not part of the 32-bit program)
+[15:35:22] [DLL] Loaded: C:\Windows\System32\wow64cpu.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\mscoree.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\kernel32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\KernelBase.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\apphelp.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\AcGenral.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\msvcrt.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\sechost.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\rpcrt4.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\shlwapi.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\user32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\win32u.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\gdi32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\gdi32full.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\msvcp_win.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ucrtbase.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ole32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\combase.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\oleaut32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\shell32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\advapi32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\uxtheme.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\winmm.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\samcli.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\msacm32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\version.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\userenv.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\dwmapi.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\urlmon.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\winspool.drv
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\mpr.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\sspicli.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\winmmbase.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\iertutil.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\SHCore.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\srvcli.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\netutils.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\imm32.dll
+[15:35:22] [Exception - Non-fatal] Code: 0x4000001F (First-chance notification on WOW64 startup (routine, not an error)) at address 0x77DC1BA2 - the program will likely handle this itself.
+[15:35:22] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscoreei.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\kernel.appcore.dll
+[15:35:22] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\clr.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\vcruntime140_clr0400.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ucrtbase_clr0400.dll
+[15:35:22] [Thread] New thread created (TID 7752)
+[15:35:22] [Thread] New thread created (TID 7968)
+[15:35:22] [Exception - Non-fatal] Code: 0x04242420 (.NET debugger notification (routine)) at address 0x760AB5B2 - the program will likely handle this itself.
+[15:35:22] [Thread] New thread created (TID 5960)
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\psapi.dll
+[15:35:22] [DLL] Module unloaded: C:\Windows\SysWOW64\psapi.dll
+[15:35:22] [Thread] New thread created (TID 7952)
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\mscorlib\ef4992f14ba62dc115c01e7a6018e263\mscorlib.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\bcryptprimitives.dll
+[15:35:22] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\clrjit.dll
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System\dfbf0633415b3a3aa4269dadfbf59dd7\System.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Drawing\c849c8b772883a7d22a281e720854cf7\System.Drawing.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Windows.Forms\dfc9997f7c0c1e092ab93d14314ddfd3\System.Windows.Forms.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Core\125e7f523f68e1f804b59ce7662cee20\System.Core.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Configuration\e0fbeb6785aa6fa336bfcd8e9ce437c2\System.Configuration.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml\09693b06a195c27853dbfbd12b550387\System.Xml.ni.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\windows.storage.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\wldp.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\profapi.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\bcrypt.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\cryptsp.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\rsaenh.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\cryptbase.dll
+[15:35:22] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.19041.1110_none_c0da534e38c01f4d\comctl32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.19041.1288_none_d9539a9fe102720c\GdiPlus.dll
+[15:35:22] [Thread] New thread created (TID 3192)
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\DWrite.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\msctf.dll
+[15:35:22] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_a8625c1886757984\comctl32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\TextShaping.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\TextInputFramework.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\CoreUIComponents.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\CoreMessaging.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ws2_32.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\WinTypes.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\WinTypes.dll
+[15:35:22] [DLL] Module unloaded: C:\Windows\SysWOW64\WinTypes.dll
+[15:35:22] [DLL] Loaded: C:\Windows\SysWOW64\ntmarta.dll
+[15:35:27] [Exception - Non-fatal] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 - the program will likely handle this itself.
+[15:35:27] [Exception - Non-fatal] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 - the program will likely handle this itself.
+[15:35:27] [DLL] Loaded: C:\Windows\Microsoft.NET\Framework\v4.0.30319\diasymreader.dll
+[15:35:27] [Managed] Exception: System.Reflection.TargetInvocationException - Exception has been thrown by the target of an invocation.
+[15:35:27] [!!! FATAL CRASH !!!] Code: 0xE0434352 (.NET CLR Exception - unhandled exception in managed code) at address 0x760AB5B2 in module: C:\Windows\SysWOW64\KernelBase.dll - Thread 9312
+[15:35:27] [Call Stack] 40 frame(s) captured - see the final report for details.
+[15:35:28] [Hang] Target window became unresponsive at 15:35:28
+[15:35:28] [Info] Monitoring stopped.
+
+==================================================
+ End of report
+==================================================

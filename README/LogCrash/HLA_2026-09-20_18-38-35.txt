@@ -1,0 +1,408 @@
+﻿==================================================
+ Automated Crash / Exit Diagnostic Report
+==================================================
+Target program : C:\Users\****\Desktop\7.62.Hard.Life.v1050287\HLA.exe
+Started at     : 2026-09-20 18:38:35
+Finished at    : 2026-09-20 18:38:38
+Architecture   : x86 (32-bit)
+Subsystem      : Windows GUI 6.0
+Entry point    : 0x003DA911
+Sections       : 5
+DLL chars      : NX_COMPAT (DEP), TERMINAL_SERVER_AWARE
+Managed (.NET) : No
+SHA256         : 0BE36C90E4E6DD2BA7935C03B7B5E74860FF260C12D67FE65894BDDA406262E9
+Signature      : Not digitally signed (or signature could not be verified)
+
+==================================================
+ PROBLEM
+==================================================
+Result        : CRASH (unhandled exception)
+Status code   : 0xC0000005
+Meaning       : Access Violation - the program tried to use invalid memory (likely a bad or null pointer)
+Address       : 0x47B993
+Module        : C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\HLA.exe
+Offset        : 0x7B993
+Time to crash : 3 second(s) after start
+Access type   : Attempted to read memory at 0x9B8
+Diagnosis     : This is very likely a NULL or near-NULL pointer bug.
+                The code tried to use a pointer or object that was never
+                initialized. This is a bug in the program itself - it cannot
+                be fixed by reinstalling or changing system settings.
+
+Faulting code : MOV EDI, [EAX+ESI*8]
+Explanation   : Load a value from memory or register into a register. A crash here usually means the source address was invalid.
+
+==================================================
+ MISSING DEPENDENCIES
+==================================================
+Not yet loaded, but the file DOES exist on disk (probably NOT the cause):
+  - d3dx9_27.dll
+  - WINMM.dll
+  - SHLWAPI.dll
+  - lua52.dll
+  - sqlite3.dll
+  - VERSION.dll
+  - steam_api.dll
+  - libtheoraplayer.dll
+  - KERNEL32.dll
+  - USER32.dll
+  - GDI32.dll
+  - COMDLG32.dll
+  - SHELL32.dll
+  - ole32.dll
+  - d3d9.dll
+  - DSOUND.dll
+  - WS2_32.dll
+
+
+==================================================
+ TECHNICAL DETAILS
+==================================================
+CPU registers at crash:
+  EAX = 0x00000000
+  EBX = 0x00000000
+  ECX = 0x011DB18C
+  EDX = 0x00000000
+  ESI = 0x00000137
+  EDI = 0x00000000
+  ESP = 0x0019FD40
+  EBP = 0x0019FD60
+  EIP = 0x0047B993
+  EFLAGS = 0x00010283
+
+Mini disassembly around crash site:
+  (engine: SharpDisasm (udis86))
+  0x0047B97A    call 0x477a30
+  0x0047B97F    mov eax, [ebp-0x20]
+  0x0047B982    mov [ebp-0x10], eax
+  0x0047B985    xor esi, esi
+  0x0047B987    test ebx, ebx
+  0x0047B989    jle 0x47bade
+  0x0047B98F    nop
+  0x0047B990    mov eax, [ebp-0x28]
+  0x0047B993    mov edi, [eax+esi*8]      <-- FAULTING INSTRUCTION
+  0x0047B996    mov ebx, [eax+esi*8+0x4]
+  0x0047B99A    mov [ebp-0x30], edi
+  0x0047B99D    mov [ebp-0x2c], ebx
+  0x0047B9A0    call dword [0x830594]
+  0x0047B9A6    mov edx, [eax]
+  0x0047B9A8    push ebx
+  0x0047B9A9    push edi
+  0x0047B9AA    mov ecx, eax
+
+
+Memory region at crash site:
+  Base        : 0x47B000
+  Size        : 0x3B5000
+  State       : MEM_COMMIT
+  Protection  : PAGE_EXECUTE_READ
+  Type        : MEM_IMAGE
+  Note        : This is a memory-mapped IMAGE (code or data from a loaded executable/DLL).
+
+Memory around crash site:
+000000000047B973  15 34 00 53 8D 4D DC E8  B1 C0 FF FF 8B 45 E0 89  |.4.S.M.......E..|
+000000000047B983  45 F0 33 F6 85 DB 0F 8E  4F 01 00 00 90 8B 45 D8  |E.3.....O.....E.|
+000000000047B993  8B 3C F0 8B 5C F0 04 89  7D D0 89 5D D4 FF 15 94  |.<..\...}..]....|
+000000000047B9A3  05 83 00 8B 10 53 57 8B  C8 FF 92 A8 00 00 00 A8  |.....SW.........|
+000000000047B9B3  04 0F 84 0F 01 00 00 68  FF 03 00 00 8D 85 FD FA  |.......h........|
+000000000047B9C3  FF FF 0F 57 C0 6A 00 50  C7 45 F0 00 00 00 00 66  |...W.j.P.E.....f|
+
+
+Stack memory (top of stack):
+  Region base : 0x19F000
+  Region size : 0x1000
+000000000019FD40  20 E0 02 10 20 68 F0 18  48 5E 07 04 00 B1 1D 01  | ... h..H^......|
+000000000019FD50  20 E0 02 10 60 FF 19 00  7E CD 81 00 00 00 00 00  | ...`...~.......|
+000000000019FD60  24 FF 19 00 5D EE 69 00  11 A9 7D 00 0A 00 00 00  |$...].i...}.....|
+000000000019FD70  00 00 00 00 43 3A 5C 55  73 65 72 73 5C 48 51 5F  |....C:\Users\HQ_|
+000000000019FD80  48 4C 4D 49 5C 44 65 73  6B 74 6F 70 5C 37 2E 36  |HLMI\Desktop\7.6|
+000000000019FD90  32 2E 48 61 72 64 2E 4C  69 66 65 2E 76 31 30 35  |2.Hard.Life.v105|
+000000000019FDA0  30 32 38 37 00 48 4C 41  2E 65 78 65 00 5D D5 77  |0287.HLA.exe.].w|
+000000000019FDB0  08 00 00 00 68 00 00 40  20 04 00 00 E0 3F 1B 01  |....h..@ ....?..|
+000000000019FDC0  9C D7 DE 77 08 44 1B 01  B8 72 D1 77 08 00 00 00  |...w.D...r.w....|
+000000000019FDD0  E8 3F 1B 01 00 00 15 01  E0 3F 1B 01 E8 3F 1B 01  |.?.......?...?..|
+000000000019FDE0  00 00 15 01 61 00 00 50  61 00 00 50 A4 00 15 01  |....a..Pa..P....|
+000000000019FDF0  00 00 15 01 44 FE 19 00  44 FE 19 00 F5 06 DF 77  |....D...D......w|
+000000000019FE00  58 02 15 01 CC 06 DF 77  35 81 67 96 28 02 00 00  |X......w5.g.(...|
+000000000019FE10  00 00 15 01 E8 3F 1B 01  00 00 15 01 61 00 00 50  |.....?......a..P|
+000000000019FE20  DB 51 89 3C 20 04 00 00  48 FE 19 01 08 FE 19 00  |.Q.< ...H.......|
+000000000019FE30  00 00 15 01 FC FE 19 00  40 AD D8 77 19 AC 9F E1  |........@..w....|
+000000000019FE40  FE FF FF FF 64 FE 19 00  CC E4 DA 77 E8 3F 1B 01  |....d......w.?..|
+000000000019FE50  28 02 00 00 90 B8 D6 77  E8 3F 1B 01 90 B8 D6 77  |(......w.?.....w|
+000000000019FE60  00 00 00 00 E8 43 1B 01  08 44 1B 01 98 FE 19 00  |.....C...D......|
+000000000019FE70  9D 8B AF 63 40 57 B2 63  28 02 00 00 90 4D D7 77  |...c@W.c(....M.w|
+000000000019FE80  10 42 1B 01 F3 55 89 3C  00 04 00 00 00 00 00 00  |.B...U.<........|
+000000000019FE90  00 00 15 01 20 04 00 00  A4 FE 19 00 53 73 AF 63  |.... .......Ss.c|
+000000000019FEA0  E8 3F 1B 01 BC FE 19 00  9B 2E 09 76 89 AB D6 77  |.?.........v...w|
+000000000019FEB0  B8 FE 19 00 FC FE 19 00  A8 A7 1A 01 C8 FE 19 00  |................|
+000000000019FEC0  AE E9 7D 00 C1 81 67 96  EC FE 19 00 DC 21 7E 00  |..}...g......!~.|
+000000000019FED0  00 00 00 00 00 00 00 00  FC FE 19 00 60 21 7E 00  |............`!~.|
+000000000019FEE0  FC FE 19 00 17 41 7D 00  01 2A 15 01 0C FF 19 00  |.....A}..*......|
+000000000019FEF0  3D CC 7D 00 00 00 00 00  01 2A 15 01 B8 08 1B 01  |=.}......*......|
+000000000019FF00  E8 CD 1A 01 A8 A7 1A 01  01 FF FF FF 48 4C 41 2E  |............HLA.|
+000000000019FF10  6C 6F 67 00 00 00 00 00  22 00 00 00 07 00 00 00  |log.....".......|
+000000000019FF20  0F 00 00 00 70 FF 19 00  18 AA 7D 00 00 00 40 00  |....p.....}...@.|
+000000000019FF30  00 00 00 00 02 2A 15 01  0A 00 00 00 C3 57 FD 1E  |.....*.......W..|
+
+
+Call stack (top = where it happened):
+  #0  HLA.exe+0x7B993
+  #1  HLA.exe+0x29EE5D
+  #2  HLA.exe+0x3DAA18
+  #3  kernel32.dll+0x1FA29
+  #4  ntdll.dll+0x67A9E
+  #5  ntdll.dll+0x67A6E
+
+Note on symbols:
+  Function names could not be resolved, so only module names and offsets
+  are shown. This does not affect the accuracy of the analysis - the
+  offset (for example "game.exe+0x1A4F2") is stable across runs and
+  machines, unlike a raw memory address.
+
+  Why symbols might be unavailable:
+    - the symbol engine failed to start.
+    - Symbol resolution in this tool is fully offline by design: it never
+      connects to the internet, and it does not use Microsoft's online
+      symbol server. It only looks for symbol files (PDB) that already
+      exist locally on this computer.
+    - Bundling all Windows symbol files with the tool is not practical:
+      the full set for a single Windows build alone can exceed several
+      gigabytes, would noticeably slow the tool down at startup, and would
+      still not match a different Windows build running on another machine.
+    - Symbols for the target program itself (its own EXE) are also not
+      bundled. Only the program's developer can provide them, and they
+      must be placed next to the target EXE to be used.
+
+  The rest of this report is still fully valid - it just shows addresses
+  and offsets instead of human-readable function names.
+
+Performance at crash:
+  Working set  : 44 MB
+  Handles      : 233
+  Free RAM     : 10250 MB
+  Free disk    : 10 GB
+
+==================================================
+ ENVIRONMENT
+==================================================
+Section entropy:
+  .text      size=0x0042F000 entropy=6.532 - Elevated - could contain compressed resources
+  ??J        size=0x00000000 entropy=0.000 - Empty section
+  ??J        size=0x004AF830 entropy=6.282 - Elevated - could contain compressed resources
+
+Threads at crash:
+  Total threads: 4
+  TID 3216     state=Wait         wait=Executive          prio=Normal       cpu=1968ms
+  TID 11588    state=Wait         wait=Executive          prio=Normal       cpu=0ms
+  TID 6304     state=Wait         wait=Executive          prio=Normal       cpu=0ms
+  TID 3380     state=Wait         wait=Executive          prio=TimeCritical cpu=0ms
+
+Compatibility : Windows applied compatibility shims to this program.
+Manual settings : ~ DISABLEDXMAXIMIZEDWINDOWEDMODE RUNASADMIN WIN8RTM
+Application manifest:
+Source: embedded resource
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel level='asInvoker' uiAccess='false' />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>
+
+Notable strings in the executable:
+  !This program cannot be run in DOS mode.
+  tIHt$HuQPh
+  HtMHt7Htaj
+  t>;wHt9;wLt4
+  G(Ht`HtAHt"j
+  <ntw<Nts<it
+  tfHtWHtHHt/
+  Tt^HtTHtJHt
+  unknown error
+  iostream stream error
+  string too long
+  invalid string position
+  t:\work\e6\e6\projecte6\Items\items.h
+  This->Family == ifOther
+  ItemList::GetOtherInfo
+  WType == maAim
+  mAction::AimingData
+  t:\work\e6\e6\projecte6\Monster\mAction.H
+  ZMonsterArray::iterator::operator *
+  t:\work\e6\e6\projecte6\zmonsterarray.h
+  This == Type::GetObjectByID(Id)
+  SafePtr<struct ZMonster>::SafePtr
+  t:\work\e6\e6\lib_tools\Ptr\SafePtr.h
+  m_Count != 0. Memory leaks possible
+  t:\work\e6\e6\lib_tools\List\ListViewer.h
+  Unknown key action type in Controller::_HandleKey
+  Controller::_HandleKey
+  Controller\controller.cpp
+  Unknown type of MainSelected ActionCursorInfo int Selected.inc
+  Controller::_HandleMouse
+  t:\work\e6\e6\projecte6\controller\inc\Selected.inc
+  Unknown type of object select by cursor in Selected.inc
+  Switch aim point
+  t:\work\e6\e6\projecte6\controller\inc\UseWorldObj.inc
+  Unknown type of MainSelected ActionCursorInfo in Talk.inc
+  t:\work\e6\e6\projecte6\controller\inc\Talk.inc
+  State != stDragItem
+  Controller::EmulateClick
+  !C->Disabled
+  Controller::TryAction
+  Controller::_SetState
+  Unknown cursor state in Controller::_SetState
+  Unknown cursor state: %d
+  Controller::CloseCurrentState
+  Bip01 Spine1
+  bmp\HUD\MultSelection.tga
+  GroundContainer->ctlMasterControl == HUDControl || GroundContainer->ctlItemsContainer == HUDControl
+  Controller::TrySwitchToInfoMode
+  Controller::TryPressMenu
+  bmp\NewController\Options.e5b
+  bmp\Controller\MultipleSelection.tga
+  bmp\E6_Controller\SelectedSprite
+  bmp\Controller\GiveItem.ifl
+  (State == stHand) || (State == stSelected)
+  Controller::GetGroundObjectUnderCursor
+  m_pCurNode != 0
+  ListViewer<unsigned long>::Iterator::operator *
+  ListViewer<unsigned long>::DeleteAll
+  Current node == NULL. May be end?
+  ListViewer<unsigned long>::Iterator::operator ++
+
+
+==================================================
+ WHAT YOU SHOULD TRY
+==================================================
+  1. The program crashed on a NULL pointer. It tried to use a pointer or object that was never created. This is a bug inside the program's own code, so no system change or reinstall will fix it.
+  2. Look for a newer version or patch of the program. If the crash is reproducible from a specific action (loading a save, opening a menu, starting a level), report that action to the developer - this gives them the exact reproduction path they need.
+  3. If the program supports mods or custom content, try running it with a clean/default profile. Third-party content is a very common trigger for this kind of bug.
+  4. Windows has applied compatibility shims to this program, meaning Microsoft already knows it has issues on this Windows version. You may want to try changing the compatibility mode of the EXE manually (Properties -> Compatibility).
+  5. You have manually configured compatibility settings for this program (~ DISABLEDXMAXIMIZEDWINDOWEDMODE RUNASADMIN WIN8RTM). If problems persist, try removing them and running the program with default settings.
+  6. The program loaded the Steam API, but the Steam client does not appear to be running. Start Steam first, and launch the program from inside the Steam library - not directly from the EXE.
+
+==================================================
+ LAST EVENTS LEADING UP TO THIS RESULT
+==================================================
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\wldp.dll
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\cryptbase.dll
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\d3dx9_27.dll
+  [18:38:35] [Exception - Non-fatal] Code: 0x4000001F (First-chance notification on WOW64 startup (routine, not an error)) at address 0x77DC1BA2 - the program will likely handle this itself.
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\umpdc.dll
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\bcryptprimitives.dll
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\mswsock.dll
+  [18:38:35] [Exception - Non-fatal] Code: 0xE06D7363 (C++ Exception (thrown from native C++ code)) at address 0x760AB5B2 - the program will likely handle this itself.
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\nsi.dll
+  [18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\dhcpcsvc.dll
+  [18:38:35] [Thread] New thread created (TID 3380)
+  [18:38:37] [Exception - Non-fatal] Code: 0xC0000005 (Access Violation - the program tried to use invalid memory (likely a bad or null pointer)) at address 0x47B993 - the program will likely handle this itself.
+  [18:38:37] [!!! FATAL CRASH !!!] Code: 0xC0000005 (Access Violation - the program tried to use invalid memory (likely a bad or null pointer)) at address 0x47B993 in module: C:\Users\****\Desktop\7.62.Hard.Life.v1050287\HLA.exe - Thread 3216
+  [18:38:37] [Call Stack] 6 frame(s) captured - see the final report for details.
+  [18:38:38] [Info] Monitoring stopped.
+
+==================================================
+ LIVE EVENT LOG
+==================================================
+[18:38:35] [Info] Target architecture: x86 (32-bit), Subsystem: Windows GUI 6.0
+[18:38:35] [Info] Sections: 5, Entry point: 0x003DA911
+[18:38:35] [Info] DLL characteristics: NX_COMPAT (DEP), TERMINAL_SERVER_AWARE
+[18:38:35] [Info] Managed (.NET): No, TLS: No, Relocations: Yes
+[18:38:35] [Warning] Symbol engine (dbghelp.dll) failed to start (error -2147483635). Function names will be limited; Module+Offset will still work.
+[18:38:35] [Info] Monitoring started for: C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\HLA.exe (PID 14040)
+[18:38:35] [Process] Target process created successfully.
+[18:38:35] [DLL] Loaded: C:\Windows\System32\ntdll.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\ntdll.dll
+[18:38:35] [DLL] Loaded: C:\Windows\System32\wow64.dll
+[18:38:35] [DLL] Loaded: C:\Windows\System32\wow64win.dll
+[18:38:35] [WOW64] Subsystem event at 0x7FFF351406B0 (64-bit layer, not part of the 32-bit program)
+[18:38:35] [DLL] Loaded: C:\Windows\System32\wow64cpu.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\kernel32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\KernelBase.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\apphelp.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\AcLayers.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\msvcrt.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\user32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\win32u.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\gdi32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\gdi32full.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\msvcp_win.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\ucrtbase.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\shell32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\shlwapi.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\oleaut32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\combase.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\rpcrt4.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\setupapi.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\cfgmgr32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\bcrypt.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\mpr.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\sfc.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\winspool.drv
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\sfc_os.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\AcGenral.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\sechost.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\ole32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\advapi32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\uxtheme.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\winmm.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\samcli.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\msacm32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\version.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\userenv.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\dwmapi.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\urlmon.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\sspicli.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\winmmbase.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\iertutil.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\SHCore.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\srvcli.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\netutils.dll
+[18:38:35] [Debug] The program sent an internal debug string message.
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\SortWindows61.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\imm32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\comdlg32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\ws2_32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\d3dx9_27.dll
+[18:38:35] [DLL] Module unloaded: C:\Windows\SysWOW64\d3dx9_27.dll
+[18:38:35] [DLL] Loaded: C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\Lua52.dll
+[18:38:35] [DLL] Loaded: C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\sqlite3.dll
+[18:38:35] [Thread] New thread created (TID 11588)
+[18:38:35] [DLL] Loaded: C:\Users\****\Desktop\7.62.Hard.Life.v1050287\steam_api.dll
+[18:38:35] [DLL] Loaded: C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\libtheoraplayer.dll
+[18:38:35] [Thread] New thread created (TID 6304)
+[18:38:35] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.19041.1110_none_c0da534e38c01f4d\comctl32.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\d3d9.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\dsound.dll
+[18:38:35] [DLL] Loaded: C:\Windows\WinSxS\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.9625_none_508ef7e4bcbbe589\msvcr90.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\IPHLPAPI.DLL
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\kernel.appcore.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\windows.storage.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\powrprof.dll
+[18:38:35] [DLL] Loaded: C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\libtheora.dll
+[18:38:35] [DLL] Loaded: C:\Users\****\Desktop\7.62.Hard.Life.v1050287\libogg.dll
+[18:38:35] [DLL] Loaded: C:\Users\****\Desktop\7.62.Hard.Life.v1050287\libvorbis.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\msvcr110.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\msvcp110.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\wldp.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\cryptbase.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\d3dx9_27.dll
+[18:38:35] [Exception - Non-fatal] Code: 0x4000001F (First-chance notification on WOW64 startup (routine, not an error)) at address 0x77DC1BA2 - the program will likely handle this itself.
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\umpdc.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\bcryptprimitives.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\mswsock.dll
+[18:38:35] [Exception - Non-fatal] Code: 0xE06D7363 (C++ Exception (thrown from native C++ code)) at address 0x760AB5B2 - the program will likely handle this itself.
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\nsi.dll
+[18:38:35] [DLL] Loaded: C:\Windows\SysWOW64\dhcpcsvc.dll
+[18:38:35] [Thread] New thread created (TID 3380)
+[18:38:37] [Exception - Non-fatal] Code: 0xC0000005 (Access Violation - the program tried to use invalid memory (likely a bad or null pointer)) at address 0x47B993 - the program will likely handle this itself.
+[18:38:37] [!!! FATAL CRASH !!!] Code: 0xC0000005 (Access Violation - the program tried to use invalid memory (likely a bad or null pointer)) at address 0x47B993 in module: C:\Users\*****\Desktop\7.62.Hard.Life.v1050287\HLA.exe - Thread 3216
+[18:38:37] [Call Stack] 6 frame(s) captured - see the final report for details.
+[18:38:38] [Info] Monitoring stopped.
+
+==================================================
+ End of report
+==================================================
