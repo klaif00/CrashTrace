@@ -48,10 +48,10 @@ The tool ships with two helper executables to handle .NET exception reading acro
 
 ## Documentation
 
-The repository includes two extended guides under the `docs/` folder:
+The repository includes two extended guides inside the `README/` folder:
 
-- [English overview](README/README_EN.md)
-- [نظرة عامة بالعربية](README/README_AR.md)
+- [English overview](README/README.md)
+- [نظرة عامة بالعربية](README/README.ar.md)
 
 The English guide is split into a user-facing part and a developer-facing part. The Arabic guide mirrors it section by section.
 
