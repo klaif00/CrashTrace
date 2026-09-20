@@ -105,6 +105,7 @@ The report contains a lot of technical detail. You don't need to understand all 
 4. Ask something like: *"Read this crash report and explain in simple terms what went wrong and how I can fix it."*
 
 The report was designed to be self-contained. The AI has everything it needs to give you a useful answer without asking you follow-up questions.
+Warning!!! The tool might be flagged as a virus or Trojan because it injects itself into the program or game to function as a debugger, so don't worry. Also, if the tool stops working, you need to disable your antivirus, extract the tool again, and run it.
 
 ---
 
