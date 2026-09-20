@@ -1,0 +1,34 @@
+﻿Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.4
+#
+# CrashTrace - Crash Diagnostic Tool
+# Copyright (c) 2026 Limen
+# Licensed under the MIT License.
+#
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{3D7C48AE-9824-43BF-9CF5-E91D4F51E771}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppHelper32", "TestAppHelper32\TestAppHelper32.csproj", "{8FECC49C-0E0D-49E4-8F2C-5C44C04D1B2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppHelper64", "TestAppHelper64\TestAppHelper64.csproj", "{A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D7C48AE-9824-43BF-9CF5-E91D4F51E771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7C48AE-9824-43BF-9CF5-E91D4F51E771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7C48AE-9824-43BF-9CF5-E91D4F51E771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7C48AE-9824-43BF-9CF5-E91D4F51E771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FECC49C-0E0D-49E4-8F2C-5C44C04D1B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FECC49C-0E0D-49E4-8F2C-5C44C04D1B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FECC49C-0E0D-49E4-8F2C-5C44C04D1B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FECC49C-0E0D-49E4-8F2C-5C44C04D1B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
